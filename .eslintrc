@@ -1,0 +1,13 @@
+{
+  "extends": ["eslint-config-airbnb/base", "prettier", "prettier/react", "prettier/standard"],
+  "plugins": ["prettier"],
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 5
+  },
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
