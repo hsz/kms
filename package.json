@@ -1,5 +1,5 @@
 {
-  "name": "kms",
+  "name": "@hsz/kms",
   "version": "1.0.0",
   "description": "AWS KMS encrypt/decrypt nodejs executable for .env files",
   "main": "index.js",
