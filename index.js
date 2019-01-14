@@ -74,7 +74,6 @@ program.command('decrypt <file>').action((file, cmd) =>
     .then(response => Promise.all(response))
     .then(pairs => pairs.map(pair => pair.join('=')).join('\n'))
     .then(console.log)
-    .catch(console.error)
 );
 
 program
@@ -91,8 +90,7 @@ program
               err ? reject(err) : resolve(data)
             )
           )
-      )
-      .catch(console.error);
+      );
   });
 
 program
@@ -102,7 +100,6 @@ program
     Client(cmd.parent)
       .encrypt(value)
       .then(console.log)
-      .catch(console.error)
   );
 
 program.parse(process.argv);
