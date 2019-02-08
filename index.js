@@ -63,13 +63,14 @@ program.command('decrypt <file>').action((file, cmd) =>
         .trim()
         .split('\n')
         .map(line => line.split('='))
-        .map(([key, value]) =>
-          value.startsWith(SECRET)
+        .map(([key, ...valueParts]) => {
+          const value = valueParts.join('=');
+          return value.startsWith(SECRET)
             ? Client(cmd.parent)
                 .decrypt(value.substr(SECRET.length))
                 .then(decrypted => [key, decrypted])
-            : [key, value]
-        )
+            : [key, value];
+        })
     )
     .then(response => Promise.all(response))
     .then(pairs => pairs.map(pair => pair.join('=')).join('\n'))
@@ -80,9 +81,10 @@ program
   .command('add <file> <content>')
   .description('Adds new line to the file encrypting the value')
   .action((file, content, cmd) => {
-    const [key, ...value] = content.split('=');
+    const [key, ...valueParts] = content.split('=');
+    const value = valueParts.join('=');
     return Client(cmd.parent)
-      .encrypt(value.join('='))
+      .encrypt(value)
       .then(
         encrypted =>
           new Promise((resolve, reject) =>
