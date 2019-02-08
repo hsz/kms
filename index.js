@@ -82,7 +82,7 @@ program
   .action((file, content, cmd) => {
     const [key, value] = content.split('=');
     return Client(cmd.parent)
-      .encrypt(value)
+      .encrypt(value.join('='))
       .then(
         encrypted =>
           new Promise((resolve, reject) =>
