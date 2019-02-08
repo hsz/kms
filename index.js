@@ -80,7 +80,7 @@ program
   .command('add <file> <content>')
   .description('Adds new line to the file encrypting the value')
   .action((file, content, cmd) => {
-    const [key, value] = content.split('=');
+    const [key, ...value] = content.split('=');
     return Client(cmd.parent)
       .encrypt(value.join('='))
       .then(
